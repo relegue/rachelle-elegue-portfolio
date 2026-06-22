@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachelle Elegue — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF8;
+    --card:#FFFFFF;
+    --ink:#1A1F2B;
+    --accent:#1F4E79;
+    --muted:#9B9388;
+    --line:#E7E4DC;
+    --radius:14px;
+    --maxw:980px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,250,248,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 28px;}
+  .nav-name{font-weight:700; font-size:15px; letter-spacing:0.01em;}
+  .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .nav-links a{color:var(--ink); text-decoration:none; font-size:14px; font-weight:500; opacity:0.75; transition:opacity .15s;}
+  .nav-links a:hover{opacity:1; color:var(--accent);}
+
+  /* HERO */
+  .hero{padding:96px 0 64px;}
+  .hero-eyebrow{
+    color:var(--accent); font-size:13px; font-weight:600; letter-spacing:0.08em;
+    text-transform:uppercase; margin:0 0 18px;
+  }
+  .hero h1{
+    font-size:clamp(40px,6vw,64px); font-weight:700; line-height:1.05; margin:0 0 22px; letter-spacing:-0.02em;
+  }
+  .hero p{
+    font-size:18px; color:var(--muted); max-width:560px; margin:0 0 32px;
+  }
+  .hero-tags{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{
+    border:1px solid var(--line); border-radius:999px; padding:6px 16px;
+    font-size:13px; font-weight:500; color:var(--ink); background:var(--card);
+  }
+
+  /* SECTION HEADERS */
+  .section{padding:72px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:36px;}
+  .section-num{color:var(--accent); font-weight:700; font-size:14px; letter-spacing:0.05em;}
+  .section-title{font-size:28px; font-weight:700; margin:0; letter-spacing:-0.01em;}
+  .section-sub{color:var(--muted); font-size:15px; margin:8px 0 0; max-width:600px;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns: 1.1fr 1.4fr; gap:48px; align-items:start;}
+  .about-grid p{font-size:16px; margin:0 0 16px; color:#3a3a38;}
+  .about-list{list-style:none; margin:0; padding:0;}
+  .about-list li{
+    display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line);
+    font-size:14px;
+  }
+  .about-list li:first-child{padding-top:0;}
+  .about-list .label{color:var(--muted);}
+  .about-list .value{font-weight:500; text-align:right;}
+
+  /* PROJECT CARDS */
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; transition:transform .18s, box-shadow .18s;
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:0 8px 24px rgba(26,31,43,0.08);}
+  .card-media{
+    width:100%; aspect-ratio:16/10; background:#EEEBE3; display:flex; align-items:center; justify-content:center;
+    color:var(--muted); font-size:13px; overflow:hidden;
+  }
+  .card-media img{width:100%; height:100%; object-fit:cover; display:block;}
+  .card-body{padding:20px 22px 24px;}
+  .card-tag{color:var(--accent); font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin:0 0 8px;}
+  .card-body h3{font-size:18px; margin:0 0 10px; font-weight:600;}
+  .card-body p{font-size:14px; color:var(--muted); margin:0; line-height:1.6;}
+
+  .full-card{grid-column:1 / -1;}
+  .full-card .card-media{aspect-ratio:auto; height:280px;}
+
+  /* CONTACT */
+  .contact{padding:96px 0 80px; text-align:left;}
+  .contact h2{font-size:36px; font-weight:700; margin:0 0 16px; letter-spacing:-0.01em;}
+  .contact p{color:var(--muted); font-size:16px; margin:0 0 32px; max-width:480px;}
+  .contact-links{display:flex; flex-wrap:wrap; gap:16px;}
+  .contact-link{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line); border-radius:10px; padding:12px 20px;
+    color:var(--ink); text-decoration:none; font-size:14px; font-weight:500;
+    background:var(--card); transition:border-color .15s, color .15s;
+  }
+  .contact-link:hover{border-color:var(--accent); color:var(--accent);}
+
+  footer{border-top:1px solid var(--line); padding:24px 0 40px; text-align:center; color:var(--muted); font-size:13px;}
+
+  @media (max-width:760px){
+    .nav-links{display:none;}
+    .about-grid{grid-template-columns:1fr;}
+    .grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 48px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="nav-name">Rachelle Elegue</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#photo">Photography</a></li>
+      <li><a href="#web">Web</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow">Communications &amp; Multimedia Portfolio</p>
+    <h1>Rachelle Elegue</h1>
+    <p>Public sector professional with 6+ years of experience translating complex information into clear, audience-focused content. Background in video production, graphic design, photography, and web design.</p>
+    <div class="hero-tags">
+      <span class="tag">Video Production</span>
+      <span class="tag">Graphic Design</span>
+      <span class="tag">Photography</span>
+      <span class="tag">Web &amp; Digital</span>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">00</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <ul class="about-list">
+        <li><span class="label">Current Role</span><span class="value">Benefit Resolution Analyst II, CalSTRS</span></li>
+        <li><span class="label">Education</span><span class="value">Digital Media Certificate, College of San Mateo (2027)</span></li>
+        <li><span class="label">Camera</span><span class="value">Nikon Z50</span></li>
+        <li><span class="label">Tools</span><span class="value">Adobe InDesign, Lightroom, Photoshop, Premiere, Canva</span></li>
+      </ul>
+      <div>
+        <p>I create content that makes complicated information easier to understand. My day-to-day work at CalSTRS involves writing formal decisions on retirement appeals, work that depends on precision and sound judgment, and that same instinct shows up in everything I build outside of it.</p>
+        <p>Outside of my public sector role, I shoot freelance photography, produce video from script to final edit, design print and digital materials, and build websites. I'm currently working toward a Digital Media Certificate at the College of San Mateo, with a focus on moving into communications and UX work in the public sector.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="video">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Video Production</h2>
+    </div>
+    <p class="section-sub">Scripting, filming, and editing content designed to make information genuinely engaging.</p>
+    <div class="grid">
+      <div class="card full-card">
+        <div class="card-media">Fraud Squad: Law &amp; Order Edition — video still</div>
+        <div class="card-body">
+          <p class="card-tag">CalSTRS · Internal Communications</p>
+          <h3>Fraud Squad: Law &amp; Order Edition</h3>
+          <p>When a colleague was unable to move forward with a fraud awareness video for our division, I took over the project. Wrote the script, filmed, directed, and edited a Law and Order style parody that introduced the division's fraud awareness unit to staff. Presented to more than 80 employees at an all-staff meeting and recognized directly by senior leadership.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">CalOpps tutorial — screen recording still</div>
+        <div class="card-body">
+          <p class="card-tag">Demonstration Project</p>
+          <h3>Finding Your Next Public Sector Role</h3>
+          <p>A screen-recorded tutorial with voiceover narration walking job seekers through how to navigate CalOpps.org, built to demonstrate instructional content for a public-facing government platform.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">Travel reel — Pipas Surf House</div>
+        <div class="card-body">
+          <p class="card-tag">Personal Project</p>
+          <h3>Pipas Surf House, Marbella</h3>
+          <p>A short-form travel reel shot and edited on location in Costa Rica, focused on visual pacing and short-form storytelling.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="design">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Graphic Design</h2>
+    </div>
+    <p class="section-sub">Print and digital materials built for internal teams and public-facing audiences.</p>
+    <div class="grid">
+      <div class="card full-card">
+        <div class="card-media">BRAL Onboarding Guide — sample pages</div>
+        <div class="card-body">
+          <p class="card-tag">CalSTRS · Service Retirement Division</p>
+          <h3>BRAL Analyst Onboarding Guide</h3>
+          <p>Before this guide existed, new analysts had nothing but a one-off email to get oriented. I designed a full multimedia onboarding resource in Adobe InDesign covering team tools, workflows, and internal resources. It has onboarded multiple analysts to date and is still in active use.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">Day in the Park &amp; Derby — event flyer</div>
+        <div class="card-body">
+          <p class="card-tag">Demonstration Project · Community Outreach</p>
+          <h3>Day in the Park &amp; Derby</h3>
+          <p>A sample community event campaign developed to demonstrate public-facing graphic design for a municipal audience, including an event flyer and countdown social graphic.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">Additional design work</div>
+        <div class="card-body">
+          <p class="card-tag">Various</p>
+          <h3>Internal &amp; Personal Design Work</h3>
+          <p>Additional print and digital design projects, including signage, social graphics, and visual reference guides built for real operational use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="photo">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Photography</h2>
+    </div>
+    <p class="section-sub">Portrait and event photography, shot on a Nikon Z50.</p>
+    <div class="grid">
+      <div class="card"><div class="card-media">Portrait</div></div>
+      <div class="card"><div class="card-media">Family session</div></div>
+      <div class="card"><div class="card-media">Portrait</div></div>
+      <div class="card"><div class="card-media">Architecture / travel</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="web">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Web &amp; Digital</h2>
+    </div>
+    <p class="section-sub">Web projects designed for mobile and desktop audiences.</p>
+    <div class="grid">
+      <div class="card full-card">
+        <div class="card-media">California Central Coast Trip Guide — mobile preview</div>
+        <div class="card-body">
+          <p class="card-tag">HTML / CSS · GitHub Pages, 2026</p>
+          <h3>California Central Coast Trip Guide</h3>
+          <p>A self-built itinerary site coded in HTML and CSS and deployed on GitHub Pages, designed for a clean mobile-first reading experience.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">UAE &amp; Türkiye Travel Itinerary</div>
+        <div class="card-body">
+          <p class="card-tag">Canva Website, 2026</p>
+          <h3>UAE &amp; Türkiye Travel Itinerary</h3>
+          <p>A multi-page travel itinerary site with day-by-day navigation, built for mobile-first browsing.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media">CIM Spectator Guide</div>
+        <div class="card-body">
+          <p class="card-tag">Canva Website, 2025</p>
+          <h3>California International Marathon Spectator Guide</h3>
+          <p>An informational guide built to help spectators navigate race day logistics, including a traffic impact map and cheer-spot planner.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p>Open to communications, multimedia, and public sector roles where storytelling and clarity matter.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:rachelle.elegue@gmail.com">Email</a>
+      <a class="contact-link" href="tel:9253258486">925-325-8486</a>
+      <a class="contact-link" href="https://linkedin.com/in/rachelle-elegue" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Rachelle Elegue — Portfolio
+</footer>
+
+</body>
+</html>
